@@ -1,5 +1,12 @@
+class DifferentCurrencyCodeError < StandardError
+  def message
+    "Different currencies"
+  end
+end
+
+
 class CurrencyConverter
-  attr_accessor :amount :code
+  attr_accessor :amount, :code
   def initialize(amount, code)
     @amount = amount
     @code = code
@@ -7,3 +14,26 @@ class CurrencyConverter
 
   def ==(other)
     self.amount == other.amount && self.code == other.code
+  end
+
+  def +(other)
+    if self.code == other.code
+      Currency.new(self.amount + other.amount, self.code)
+    else
+      raise DifferentCurrencyCodeError
+    end
+  end
+
+  def -(other)
+    if self.code == other.code
+      Currency.new(self.amount - other.amount, self.code)
+    else
+      raise DifferentCurrencyCodeError
+    end
+  end
+
+  def *(number)
+    rounded_amount = self.amount * number
+    Currency.new(rounded_amount.round(2), self.code)
+  end
+end
