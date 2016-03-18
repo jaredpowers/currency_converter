@@ -5,7 +5,7 @@ class DifferentCurrencyCodeError < StandardError
 end
 
 
-class CurrencyConverter
+class Currency
   attr_accessor :amount, :code
   def initialize(amount, code)
     @amount = amount
