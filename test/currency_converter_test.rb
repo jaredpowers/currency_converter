@@ -28,7 +28,11 @@ class CurrencyConverterTest < Minitest::Test
   end
 
   def test_currency_conversion_3
-    
+    currency = Currency.new(10, "EUR")
+    code = :JPY
+    rate_library = {USD: 1.0, EUR: 0.74, JPY:120.0}
+    currency_conversion_1 = CurrencyConverter.new(rate_library)
+    yen_to_euro_currency_conversion_1.converter(currency, code)
   end
 
 end
